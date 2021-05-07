@@ -1,13 +1,10 @@
 """Pacman, classic arcade game.
-
 Exercises
-
 1. Change the board.
 2. Change the number of ghosts.
 3. Change where pacman starts.
 4. Make the ghosts faster/slower.
 5. Make the ghosts smarter.
-
 """
 
 from random import choice
@@ -31,14 +28,14 @@ tiles = [
     0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
     0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0,
     0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -124,15 +121,99 @@ def move():
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
 
+    #print(pacman)
+    
     for point, course in ghosts:
         if valid(point + course):
             point.move(course)
-        else:
+
+        elif pacman[0] < -40 and pacman[1] > 0: # 1
+            print("1 cuadrante")
             options = [
-                vector(10, 0),
-                vector(-10, 0),
-                vector(0, 10),
-                vector(0, -10),
+                vector(10, 0), # right
+                vector(-10, 0), # left 
+                vector(0, 10), # up
+                vector(0, -10), # down 
+
+                vector(-10, 0), # left 
+                vector(0, 10), # up 
+                vector(-10, 0), # left 
+                vector(0, 10), # up 
+
+                vector(0, 10), # up 
+                vector(0, 10), # up 
+            ]
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
+
+        elif pacman[0] < -40 and pacman[1] < 0: # 2
+            print("2 cuadrante")
+            options = [
+                vector(10, 0), # right
+                vector(-10, 0), # left 
+                vector(0, 10), # up
+                vector(0, -10), # down 
+
+                vector(0, -10), # down 
+                vector(-10, 0), # left 
+                vector(0, -10), # down 
+                vector(-10, 0), # left 
+
+                vector(0, -10), # down 
+                vector(0, -10), # down 
+            ]
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
+
+        elif pacman[0] > -40 and pacman[1] < 0: # 3
+            print("3 cuadrante")
+            options = [
+                vector(10, 0), # right
+                vector(-10, 0), # left 
+                vector(0, 10), # up
+                vector(0, -10), # down 
+
+                vector(0, -10), # down 
+                vector(10, 0), # right
+                vector(0, -10), # down 
+                vector(10, 0), # right
+
+                vector(0, -10), # down 
+                vector(0, -10), # down 
+            ]
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
+
+        elif pacman[0] > -40 and pacman[1] > 0: # 4
+            print("4 cuadrante")
+            options = [
+                vector(10, 0), # right
+                vector(-10, 0), # left 
+                vector(0, 10), # up
+                vector(0, -10), # down 
+
+                vector(0, 10), # up
+                vector(10, 0), # right
+                vector(0, 10), # up
+                vector(10, 0), # right
+
+                vector(0, 10), # up
+                vector(0, 10), # up
+            ]
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
+
+        else: # center
+            print("Default")
+            options = [
+                vector(10, 0), # right
+                vector(-10, 0), # left 
+                vector(0, 10), # up
+                vector(0, -10), # down 
             ]
             plan = choice(options)
             course.x = plan.x
