@@ -128,7 +128,7 @@ def move():
             point.move(course)
 
         elif pacman[0] < -40 and pacman[1] > 0: # 1
-            print("1 cuadrante")
+           #  print("1 cuadrante")
             options = [
                 vector(10, 0), # right
                 vector(-10, 0), # left 
@@ -148,7 +148,7 @@ def move():
             course.y = plan.y
 
         elif pacman[0] < -40 and pacman[1] < 0: # 2
-            print("2 cuadrante")
+           #  print("2 cuadrante")
             options = [
                 vector(10, 0), # right
                 vector(-10, 0), # left 
@@ -168,7 +168,7 @@ def move():
             course.y = plan.y
 
         elif pacman[0] > -40 and pacman[1] < 0: # 3
-            print("3 cuadrante")
+           #  print("3 cuadrante")
             options = [
                 vector(10, 0), # right
                 vector(-10, 0), # left 
@@ -188,7 +188,7 @@ def move():
             course.y = plan.y
 
         elif pacman[0] > -40 and pacman[1] > 0: # 4
-            print("4 cuadrante")
+           # print("4 cuadrante")
             options = [
                 vector(10, 0), # right
                 vector(-10, 0), # left 
@@ -208,7 +208,7 @@ def move():
             course.y = plan.y
 
         else: # center
-            print("Default")
+            # print("Default")
             options = [
                 vector(10, 0), # right
                 vector(-10, 0), # left 
